@@ -10,133 +10,151 @@
             --text-sub: #555555;
             --border: #e0e0e0;
             --bg: #ffffff;
+            --accent: #6366f1;
         }
         
         body {
-            font-family: "Times New Roman", "Noto Serif TC", serif; /* 襯線體增加高級感 */
+            font-family: "Times New Roman", "Noto Serif TC", serif;
             background-color: var(--bg);
             color: var(--text-main);
             margin: 0;
             padding: 0;
+            -webkit-font-smoothing: antialiased;
         }
 
         .container {
             max-width: 1100px;
             margin: 0 auto;
-            padding: 60px 20px;
+            padding: 80px 20px;
         }
 
         header {
             text-align: center;
-            margin-bottom: 80px;
-            letter-spacing: 2px;
+            margin-bottom: 100px;
+            letter-spacing: 3px;
         }
 
         header h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             text-transform: uppercase;
             font-weight: 300;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         .nav-back {
             text-decoration: none;
             color: var(--text-sub);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
             border-bottom: 1px solid var(--text-sub);
-            padding-bottom: 2px;
+            padding-bottom: 4px;
+            transition: 0.3s;
         }
+        .nav-back:hover { color: var(--accent); border-color: var(--accent); }
 
-        /* 主題區域 */
+        /* 章節標題 */
         .section-title {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             text-align: center;
-            margin: 60px 0 40px;
-            font-weight: normal;
-            position: relative;
+            margin: 100px 0 50px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
         .section-title::after {
             content: '';
             display: block;
-            width: 40px;
+            width: 30px;
             height: 1px;
             background: #000;
-            margin: 20px auto;
+            margin: 25px auto;
         }
 
         /* 網格系統 */
         .comparison-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
 
         .model-item {
+            background: #fff;
             border: 1px solid var(--border);
-            padding-bottom: 20px;
-            transition: all 0.4s ease;
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
         .model-item:hover {
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
         }
 
         .img-wrapper {
             width: 100%;
+            aspect-ratio: 1 / 1;
             overflow: hidden;
-            background-color: #f9f9f9;
+            background-color: #f5f5f5;
         }
 
         .img-wrapper img {
             width: 100%;
+            height: 100%;
+            object-fit: cover;
             display: block;
-            transition: transform 0.8s ease;
+            transition: transform 1.2s ease;
         }
 
         .model-item:hover .img-wrapper img {
-            transform: scale(1.05); /* 縮放效果 */
+            transform: scale(1.08);
         }
 
         .info-box {
-            padding: 25px 15px;
+            padding: 30px 20px;
             text-align: center;
         }
 
         .model-label {
-            font-size: 0.8rem;
-            color: #888;
+            font-size: 0.75rem;
+            color: #999;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 10px;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
             display: block;
         }
 
         .prompt-preview {
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             color: var(--text-sub);
             line-height: 1.8;
-            height: 80px;
+            height: 70px;
             overflow-y: auto;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             padding: 0 10px;
+            scrollbar-width: thin;
         }
 
         .btn-copy {
             background: none;
             border: 1px solid #111;
-            padding: 10px 25px;
+            padding: 12px 30px;
             cursor: pointer;
             font-family: inherit;
             text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
             transition: 0.3s;
         }
 
         .btn-copy:hover {
             background: #111;
             color: #fff;
+        }
+
+        footer {
+            margin-top: 150px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #bbb;
+            letter-spacing: 1px;
         }
     </style>
 </head>
@@ -145,39 +163,30 @@
     <div class="container">
         <header>
             <a href="index.html" class="nav-back">Back to Home</a>
-            <h1>Visual Generation</h1>
-            <p style="color:#888;">AI 圖像生成的極致探索</p>
+            <h1>Visual Exploration</h1>
+            <p style="color:#999; font-style: italic; margin-top: 15px;">A comparative study of AI generative models</p>
         </header>
 
-        <h2 class="section-title">Case 01: The Dreamlike Elf</h2>
-        
+        <h2 class="section-title">Case 01. The Forest Elf</h2>
         <div class="comparison-grid">
             <div class="model-item">
-                <div class="img-wrapper">
-                    <img src="images/elf_mj.jpg" alt="MJ" onerror="this.src='https://via.placeholder.com/500x500?text=Elf+MJ'">
-                </div>
+                <div class="img-wrapper"><img src="images/elf_mj.jpg" alt="MJ" onerror="this.src='https://via.placeholder.com/500?text=Elf+MJ'"></div>
                 <div class="info-box">
                     <span class="model-label">Midjourney</span>
                     <div class="prompt-preview" id="p1">Cinematic medium shot, featuring a female elf with a dreamlike appearance...</div>
                     <button class="btn-copy" onclick="copyText('p1')">Copy Prompt</button>
                 </div>
             </div>
-
             <div class="model-item">
-                <div class="img-wrapper">
-                    <img src="images/elf_jimeng.jpg" alt="Jimeng" onerror="this.src='https://via.placeholder.com/500x500?text=Elf+Jimeng'">
-                </div>
+                <div class="img-wrapper"><img src="images/elf_jimeng.jpg" alt="Jimeng" onerror="this.src='https://via.placeholder.com/500?text=Elf+Jimeng'"></div>
                 <div class="info-box">
                     <span class="model-label">Jimeng</span>
                     <div class="prompt-preview" id="p2">一位身著半透明薄紗長裙的夢幻女性精靈...</div>
                     <button class="btn-copy" onclick="copyText('p2')">Copy Prompt</button>
                 </div>
             </div>
-
             <div class="model-item">
-                <div class="img-wrapper">
-                    <img src="images/elf_banana.jpg" alt="Banana" onerror="this.src='https://via.placeholder.com/500x500?text=Elf+Banana'">
-                </div>
+                <div class="img-wrapper"><img src="images/elf_banana.jpg" alt="Banana" onerror="this.src='https://via.placeholder.com/500?text=Elf+Banana'"></div>
                 <div class="info-box">
                     <span class="model-label">Banana AI</span>
                     <div class="prompt-preview" id="p3">高度寫實攝影，一名優雅的女性精靈坐在森林中的岩石上...</div>
@@ -185,14 +194,45 @@
                 </div>
             </div>
         </div>
-        
+
+        <h2 class="section-title">Case 02. Loneliness at Tamsui</h2>
+        <div class="comparison-grid">
+            <div class="model-item">
+                <div class="img-wrapper"><img src="images/man_mj.jpg" alt="MJ" onerror="this.src='https://via.placeholder.com/500?text=Man+MJ'"></div>
+                <div class="info-box">
+                    <span class="model-label">Midjourney</span>
+                    <div class="prompt-preview" id="p4">A lonely man sitting on a bench by Tamsui river, looking hopeless, overcast sky...</div>
+                    <button class="btn-copy" onclick="copyText('p4')">Copy Prompt</button>
+                </div>
+            </div>
+            <div class="model-item">
+                <div class="img-wrapper"><img src="images/man_jimeng.jpg" alt="Jimeng" onerror="this.src='https://via.placeholder.com/500?text=Man+Jimeng'"></div>
+                <div class="info-box">
+                    <span class="model-label">Jimeng</span>
+                    <div class="prompt-preview" id="p5">一名中年男子孤獨地坐在河邊，身邊放著蛋糕，影像風格極度寫實...</div>
+                    <button class="btn-copy" onclick="copyText('p5')">Copy Prompt</button>
+                </div>
+            </div>
+            <div class="model-item">
+                <div class="img-wrapper"><img src="images/man_banana.jpg" alt="Banana" onerror="this.src='https://via.placeholder.com/500?text=Man+Banana'"></div>
+                <div class="info-box">
+                    <span class="model-label">Banana AI</span>
+                    <div class="prompt-preview" id="p6">捕捉一名剛失業的男子癱坐在台灣淡水河岸步道的木椅上，面對著灰暗河口...</div>
+                    <button class="btn-copy" onclick="copyText('p6')">Copy Prompt</button>
+                </div>
+            </div>
         </div>
+
+        <footer>
+            <p>© DOCUMENTATION OF AI LEARNING PROCESS</p>
+        </footer>
+    </div>
 
     <script>
         function copyText(id) {
             const text = document.getElementById(id).innerText;
             navigator.clipboard.writeText(text);
-            alert("Prompt Copied!");
+            alert("Copied to clipboard.");
         }
     </script>
 </body>
