@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>視覺生成 - AI 課程筆記</title>
+    <style>
+        :root { --primary: #6366f1; --bg: #0f172a; --card-bg: #1e293b; --text: #f8fafc; }
+        body { font-family: sans-serif; background-color: var(--bg); color: var(--text); padding: 20px; line-height: 1.6; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .back-btn { display: inline-block; color: #94a3b8; text-decoration: none; margin-bottom: 20px; }
+        h1 { color: var(--primary); border-bottom: 2px solid #334155; padding-bottom: 10px; }
+        
+        /* 案例卡片樣式 */
+        .case-card { 
+            background: var(--card-bg); 
+            border-radius: 12px; 
+            margin-bottom: 40px; 
+            overflow: hidden;
+            border: 1px solid #334155;
+            display: flex;
+            flex-direction: column;
+        }
+        @media (min-width: 768px) { .case-card { flex-direction: row; } }
+        
+        .prompt-side { padding: 20px; flex: 1; border-right: 1px solid #334155; }
+        .image-side { flex: 1; background: #000; display: flex; align-items: center; justify-content: center; min-height: 300px; }
+        .image-side img { max-width: 1000px; width: 100%; height: auto; display: block; }
+        
+        .model-tag { background: var(--primary); color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; }
+        .prompt-text { background: #0f172a; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 0.9rem; color: #cbd5e1; margin: 10px 0; white-space: pre-wrap; }
+        .copy-btn { background: #334155; border: none; color: white; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; }
+        .copy-btn:hover { background: #475569; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">← 回到首頁</a>
+        <h1>🎨 視覺生成：多模型實測對比</h1>
+
+        <div class="case-card">
+            <div class="prompt-side">
+                <span class="model-tag">Midjourney</span>
+                <h3>主題：夢幻精靈與西瓜</h3>
+                <div class="prompt-text" id="p1">Cinematic medium shot, featuring a female elf with a dreamlike appearance... sitting on a wet moss-covered rock... holding a chilled slice of watermelon...</div>
+                <button class="copy-btn" onclick="copyText('p1')">複製指令</button>
+            </div>
+            <div class="image-side">
+                <img src="elf_mj.jpg" alt="精靈 MJ 成果圖" onerror="this.src='https://via.placeholder.com/500x500?text=Wait+for+Upload+Image1'">
+            </div>
+        </div>
+
+        <div class="case-card">
+            <div class="prompt-side">
+                <span class="model-tag">BANANA</span>
+                <h3>主題：淡水河畔的孤獨感</h3>
+                <div class="prompt-text" id="p2">捕捉一名剛失業的男子癱坐在台灣淡水河岸步道的木椅上... 眼神空洞地望著遠方... 帶有典型的台北冬季濕冷感...</div>
+                <button class="copy-btn" onclick="copyText('p2')">複製指令</button>
+            </div>
+            <div class="image-side">
+                <img src="man_banana.jpg" alt="失業男子 成果圖" onerror="this.src='https://via.placeholder.com/500x500?text=Wait+for+Upload+Image2'">
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function copyText(id) {
+            const text = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(text);
+            alert("指令已複製！");
+        }
+    </script>
+</body>
+</html>
