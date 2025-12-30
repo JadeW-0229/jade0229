@@ -3,106 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI學習之路</title>
+    <title>AI 學習筆記 | 星川老師課程</title>
     <style>
         :root {
-            --primary: #6366f1;
-            --bg: #0f172a;
-            --card-bg: #1e293b;
-            --text: #f8fafc;
+            --text-main: #111111;
+            --text-sub: #666666;
+            --border: #e0e0e0;
+            --bg: #ffffff;
         }
+
         body {
-            font-family: -apple-system, "Noto Sans TC", sans-serif;
+            font-family: "Times New Roman", "Noto Serif TC", serif;
             background-color: var(--bg);
-            color: var(--text);
+            color: var(--text-main);
             margin: 0;
-            padding: 20px;
-            line-height: 1.6;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
         }
-        header {
-            text-align: center;
-            padding: 50px 0;
-            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-            border-radius: 15px;
-            margin-bottom: 30px;
-        }
+
         .container {
             max-width: 1000px;
             margin: 0 auto;
+            padding: 100px 20px;
         }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-        .card {
-            background-color: var(--card-bg);
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid #334155;
-            transition: transform 0.2s;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-        }
-        h2 { color: var(--primary); margin-top: 0; }
-        .tag {
-            display: inline-block;
-            background: #334155;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            margin-right: 5px;
-        }
-        footer {
+
+        header {
             text-align: center;
-            margin-top: 50px;
-            color: #64748b;
-            font-size: 0.9rem;
+            margin-bottom: 120px;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 300;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        header p {
+            font-size: 1rem;
+            color: var(--text-sub);
+            letter-spacing: 2px;
+            font-style: italic;
+        }
+
+        /* 導覽網格 */
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 60px;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 40px;
+            transition: 0.4s;
+        }
+
+        .nav-item:hover {
+            border-color: #000;
+            transform: translateY(-5px);
+        }
+
+        .category-no {
+            font-size: 0.8rem;
+            color: #999;
+            margin-bottom: 15px;
+            display: block;
+            letter-spacing: 2px;
+        }
+
+        .nav-item h2 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin: 0 0 15px 0;
+            letter-spacing: 1px;
+        }
+
+        .nav-item p {
+            font-size: 0.95rem;
+            color: var(--text-sub);
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        .view-more {
+            margin-top: 20px;
+            display: inline-block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #000;
+            font-weight: bold;
+        }
+
+        footer {
+            margin-top: 150px;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #bbb;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* 手機版優化 */
+        @media (max-width: 600px) {
+            header h1 { font-size: 2rem; }
+            .nav-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
+
     <div class="container">
         <header>
-            <h1>AI課程筆記</h1>
-            <p>AI 創作全流程學習手冊：從文本、圖像到音視頻生成</p>
+            <h1>AI NOTES</h1>
+            <p>The Documentation of Generative Art & Logic</p>
         </header>
 
-        <div class="grid">
-            <a href="thinking.html" style="text-decoration: none; color: inherit;">
-                <div class="card">
-                    <h2>🧠 創作思維</h2>
-                    <p>人物設定基礎邏輯：用於什麼 + 輸出格式 + 禁止什麼。</p>
-                    <div class="tag">人設邏輯</div><div class="tag">文本拆解</div>
-                    <p style="color: #6366f1; font-size: 0.8rem; margin-top: 10px;">點擊查看更多 →</p>
-                </div>
+        <nav class="nav-grid">
+            <a href="thinking.html" class="nav-item">
+                <span class="category-no">01 / LOGIC</span>
+                <h2>創作思維與人設</h2>
+                <p>探索 AI 角色建立的核心邏輯，從 System Prompt 到文本拆解的三階段工作流，建立穩定的生成基礎。</p>
+                <span class="view-more">Enter Section →</span>
             </a>
-            <a href="visual.html" style="text-decoration: none; color: inherit;">
-                <div class="card">
-                    <h2>🎨 圖像生成</h2>
-                    <p>模型優勢互補：MJ (審美)、即夢 (人像)、BANANA (修圖)。</p>
-                    <div class="tag">Midjourney</div><div class="tag">溶圖技巧</div>
-                    <p style="color: #6366f1; font-size: 0.8rem; margin-top: 10px;">查看實測案例 →</p>
-                </div>
+
+            <a href="visual.html" class="nav-item">
+                <span class="category-no">02 / VISUAL</span>
+                <h2>視覺與圖像生成</h2>
+                <p>對比 Midjourney、即夢與 Banana AI 的表現差異。包含精靈與失意男子等主題的指令實測與對照。</p>
+                <span class="view-more">Enter Section →</span>
             </a>
-            <div class="card">
-                <h2>🎬 視頻生成</h2>
-                <p>萬能公式：場景 + 主體 + 動作情緒 + 鏡頭語言。</p>
-                <div class="tag">SORA2</div><div class="tag">可靈</div><div class="tag">VEO</div>
-            </div>
-            <div class="card">
-                <h2>🎵 音頻控制</h2>
-                <p>控制曲風與情緒：利用元標籤 (Meta Tags) 與情緒控制。</p>
-                <div class="tag">SUNO</div><div class="tag">MINIMAX</div>
-            </div>
-        </div>
+
+            <a href="video.html" class="nav-item">
+                <span class="category-no">03 / MOTION</span>
+                <h2>動態視頻創作</h2>
+                <p>萬能視頻公式應用：場景、主體、動作、鏡頭。針對 VEO 3.1 與 SORA2 的壓力測試與問題解決。</p>
+                <span class="view-more">Enter Section →</span>
+            </a>
+
+            <a href="audio.html" class="nav-item">
+                <span class="category-no">04 / AUDIO</span>
+                <h2>聽覺與音樂控制</h2>
+                <p>SUNO 元標籤結構化寫歌技巧，以及使用 MINIMAX 精準控制語音停頓與情緒起伏。 (Coming Soon)</p>
+                <span class="view-more">Enter Section →</span>
+            </a>
+        </nav>
 
         <footer>
-            <p>© 2024 AI 學習筆記網站 - 使用 Gemini 與 GitHub Pages 建立</p>
+            <p>© 2025 AI LEARNING JOURNAL | POWERED BY GITHUB PAGES</p>
         </footer>
     </div>
+
 </body>
 </html>
