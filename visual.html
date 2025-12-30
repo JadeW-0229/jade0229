@@ -3,110 +3,196 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>視覺生成對比 - AI 課程筆記</title>
+    <title>視覺生成 | AI 筆記</title>
     <style>
-        :root { --primary: #6366f1; --bg: #0f172a; --card-bg: #1e293b; --text: #f8fafc; }
-        body { font-family: sans-serif; background-color: var(--bg); color: var(--text); padding: 20px; line-height: 1.6; }
-        .container { max-width: 1200px; margin: 0 auto; }
-        .back-btn { display: inline-block; color: #94a3b8; text-decoration: none; margin-bottom: 20px; }
-        h1 { color: var(--primary); border-bottom: 2px solid #334155; padding-bottom: 10px; }
-        h2 { background: #334155; padding: 10px; border-radius: 8px; margin-top: 40px; font-size: 1.5rem; }
+        :root {
+            --text-main: #111111;
+            --text-sub: #555555;
+            --border: #e0e0e0;
+            --bg: #ffffff;
+        }
         
-        /* 網格佈局：手機版 1 欄，電腦版 3 欄 */
-        .comparison-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-            gap: 20px; 
+        body {
+            font-family: "Times New Roman", "Noto Serif TC", serif; /* 襯線體增加高級感 */
+            background-color: var(--bg);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 80px;
+            letter-spacing: 2px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+
+        .nav-back {
+            text-decoration: none;
+            color: var(--text-sub);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--text-sub);
+            padding-bottom: 2px;
+        }
+
+        /* 主題區域 */
+        .section-title {
+            font-size: 1.8rem;
+            text-align: center;
+            margin: 60px 0 40px;
+            font-weight: normal;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 1px;
+            background: #000;
+            margin: 20px auto;
+        }
+
+        /* 網格系統 */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .model-item {
+            border: 1px solid var(--border);
+            padding-bottom: 20px;
+            transition: all 0.4s ease;
+        }
+
+        .model-item:hover {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .img-wrapper {
+            width: 100%;
+            overflow: hidden;
+            background-color: #f9f9f9;
+        }
+
+        .img-wrapper img {
+            width: 100%;
+            display: block;
+            transition: transform 0.8s ease;
+        }
+
+        .model-item:hover .img-wrapper img {
+            transform: scale(1.05); /* 縮放效果 */
+        }
+
+        .info-box {
+            padding: 25px 15px;
+            text-align: center;
+        }
+
+        .model-label {
+            font-size: 0.8rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .prompt-preview {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            line-height: 1.8;
+            height: 80px;
+            overflow-y: auto;
             margin-bottom: 20px;
+            padding: 0 10px;
         }
-        
-        .model-card { 
-            background: var(--card-bg); 
-            border-radius: 12px; 
-            overflow: hidden; 
-            border: 1px solid #334155;
-            display: flex;
-            flex-direction: column;
+
+        .btn-copy {
+            background: none;
+            border: 1px solid #111;
+            padding: 10px 25px;
+            cursor: pointer;
+            font-family: inherit;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            transition: 0.3s;
         }
-        
-        .image-box { background: #000; width: 100%; aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; }
-        .image-box img { width: 100%; height: 100%; object-fit: cover; }
-        
-        .content-box { padding: 15px; flex-grow: 1; }
-        .model-name { font-weight: bold; color: var(--primary); font-size: 1.1rem; border-bottom: 1px solid #475569; margin-bottom: 10px; padding-bottom: 5px; }
-        .prompt-text { font-size: 0.85rem; color: #cbd5e1; background: #0f172a; padding: 10px; border-radius: 6px; height: 100px; overflow-y: auto; margin-bottom: 10px; }
-        .copy-btn { width: 100%; background: #475569; border: none; color: white; padding: 8px; border-radius: 4px; cursor: pointer; transition: 0.3s; }
-        .copy-btn:hover { background: var(--primary); }
+
+        .btn-copy:hover {
+            background: #111;
+            color: #fff;
+        }
     </style>
 </head>
 <body>
+
     <div class="container">
-        <a href="index.html" class="back-btn">← 回到首頁</a>
-        <h1>🎨 視覺生成：多模型實測對比</h1>
+        <header>
+            <a href="index.html" class="nav-back">Back to Home</a>
+            <h1>Visual Generation</h1>
+            <p style="color:#888;">AI 圖像生成的極致探索</p>
+        </header>
 
-        <h2>主題一：夢幻精靈在森林吃西瓜</h2>
+        <h2 class="section-title">Case 01: The Dreamlike Elf</h2>
+        
         <div class="comparison-grid">
-            <div class="model-card">
-                <div class="image-box"><img src="images/elf_mj.jpg" alt="MJ" onerror="this.src='https://via.placeholder.com/400?text=Elf+MJ'"></div>
-                <div class="content-box">
-                    <div class="model-name">Midjourney (MJ)</div>
-                    <div class="prompt-text" id="p1">Cinematic medium shot, featuring a female elf with a dreamlike appearance, red hair with blue highlights, sitting on a wet moss-covered rock holding a watermelon...</div>
-                    <button class="copy-btn" onclick="copyText('p1')">複製指令</button>
+            <div class="model-item">
+                <div class="img-wrapper">
+                    <img src="images/elf_mj.jpg" alt="MJ" onerror="this.src='https://via.placeholder.com/500x500?text=Elf+MJ'">
+                </div>
+                <div class="info-box">
+                    <span class="model-label">Midjourney</span>
+                    <div class="prompt-preview" id="p1">Cinematic medium shot, featuring a female elf with a dreamlike appearance...</div>
+                    <button class="btn-copy" onclick="copyText('p1')">Copy Prompt</button>
                 </div>
             </div>
-            <div class="model-card">
-                <div class="image-box"><img src="images/elf_jimeng.jpg" alt="即夢" onerror="this.src='https://via.placeholder.com/400?text=Elf+Jimeng'"></div>
-                <div class="content-box">
-                    <div class="model-name">即夢 (Jimeng)</div>
-                    <div class="prompt-text" id="p2">一位身著半透明薄紗長裙的夢幻女性精靈正坐在佈滿青苔的濕潤岩石上，手中捧著一塊被咬過一口的冰鎮西瓜...</div>
-                    <button class="copy-btn" onclick="copyText('p2')">複製指令</button>
+
+            <div class="model-item">
+                <div class="img-wrapper">
+                    <img src="images/elf_jimeng.jpg" alt="Jimeng" onerror="this.src='https://via.placeholder.com/500x500?text=Elf+Jimeng'">
+                </div>
+                <div class="info-box">
+                    <span class="model-label">Jimeng</span>
+                    <div class="prompt-preview" id="p2">一位身著半透明薄紗長裙的夢幻女性精靈...</div>
+                    <button class="btn-copy" onclick="copyText('p2')">Copy Prompt</button>
                 </div>
             </div>
-            <div class="model-card">
-                <div class="image-box"><img src="images/elf_banana.jpg" alt="BANANA" onerror="this.src='https://via.placeholder.com/400?text=Elf+BANANA'"></div>
-                <div class="content-box">
-                    <div class="model-name">BANANA</div>
-                    <div class="prompt-text" id="p3">高度寫實攝影，一名優雅的女性精靈坐在森林中的岩石上，細膩的皮膚紋理與服裝細節，光線穿透薄霧...</div>
-                    <button class="copy-btn" onclick="copyText('p3')">複製指令</button>
+
+            <div class="model-item">
+                <div class="img-wrapper">
+                    <img src="images/elf_banana.jpg" alt="Banana" onerror="this.src='https://via.placeholder.com/500x500?text=Elf+Banana'">
+                </div>
+                <div class="info-box">
+                    <span class="model-label">Banana AI</span>
+                    <div class="prompt-preview" id="p3">高度寫實攝影，一名優雅的女性精靈坐在森林中的岩石上...</div>
+                    <button class="btn-copy" onclick="copyText('p3')">Copy Prompt</button>
                 </div>
             </div>
         </div>
-
-        <h2>主題二：失意男子在淡水河畔</h2>
-        <div class="comparison-grid">
-            <div class="model-card">
-                <div class="image-box"><img src="images/man_mj.jpg" alt="MJ" onerror="this.src='https://via.placeholder.com/400?text=Man+MJ'"></div>
-                <div class="content-box">
-                    <div class="model-name">Midjourney (MJ)</div>
-                    <div class="prompt-text" id="p4">A lonely man sitting on a bench by Tamsui river, looking hopeless, overcast sky, cinematic photography...</div>
-                    <button class="copy-btn" onclick="copyText('p4')">複製指令</button>
-                </div>
-            </div>
-            <div class="model-card">
-                <div class="image-box"><img src="images/man_jimeng.jpg" alt="即夢" onerror="this.src='https://via.placeholder.com/400?text=Man+Jimeng'"></div>
-                <div class="content-box">
-                    <div class="model-name">即夢 (Jimeng)</div>
-                    <div class="prompt-text" id="p5">一名中年男子孤獨地坐在河邊，身邊放著蛋糕，冷色調，寫實風格...</div>
-                    <button class="copy-btn" onclick="copyText('p5')">複製指令</button>
-                </div>
-            </div>
-            <div class="model-card">
-                <div class="image-box"><img src="images/man_banana.jpg" alt="BANANA" onerror="this.src='https://via.placeholder.com/400?text=Man+BANANA'"></div>
-                <div class="content-box">
-                    <div class="model-name">BANANA</div>
-                    <div class="prompt-text" id="p6">捕捉一名剛失業的男子癱坐在台灣淡水河岸步道的木椅上，面對著灰暗且波濤起伏的河口...</div>
-                    <button class="copy-btn" onclick="copyText('p6')">複製指令</button>
-                </div>
-            </div>
+        
         </div>
-
-    </div>
 
     <script>
         function copyText(id) {
             const text = document.getElementById(id).innerText;
             navigator.clipboard.writeText(text);
-            alert("指令已複製！");
+            alert("Prompt Copied!");
         }
     </script>
 </body>
